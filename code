@@ -1,0 +1,123 @@
+# Kevin Granados HangMan Game 11/28/19
+
+import time
+
+# Stop Counter 
+
+counter = 0
+
+def stop():
+  while True:
+    for i in range(counter):
+      break
+
+# Graphical Intro
+
+def intro():
+  print("       - Welcome to Kevin's HangMan Game -")
+  time.sleep(.1)
+  print(" __ __   ____  ____    ____  ___ ___   ____  ____  ")
+  print("|  |  | /    ||    \  /    ||   |   | /    ||    \ ")
+  time.sleep(.1)
+  print("|  |  ||  o  ||  _  ||   __|| _   _ ||  o  ||  _  |")
+  print("|  _  ||     ||  |  ||  |  ||  \_/  ||     ||  |  |")
+  time.sleep(.1)
+  print("|  |  ||  _  ||  |  ||  |_ ||   |   ||  _  ||  |  |")
+  print("|  |  ||  |  ||  |  ||     ||   |   ||  |  ||  |  |")
+  time.sleep(.1)
+  print("|__|__||__|__||__|__||___,_||___|___||__|__||__|__|")
+  print("")
+  time.sleep(1)
+  
+# Main Menu
+
+def main():
+  while True:
+    # Stop Counter
+    global counter
+    counter += 1
+    intro()
+    # Start Message
+    start = input("In order to start type 'Start': ")
+    start = start.upper()
+    time.sleep(1)
+    print("----------------------------------------")
+    if start == 'START':
+      game()
+    else :
+      print("I did not understand, restarting...")
+      print("----------------------------------------")
+      time.sleep(1)
+      print("")
+
+# Restart
+
+def restart():
+  restart = input("Would you like to play again?\n'C' to Continue\n'Q' to Quit\nEnter here: ")
+  restart = restart.upper()
+  if restart == 'C':
+    time.sleep(1)
+    print("Restarting...")
+    print("----------------------------------------")
+    time.sleep(1)
+    game()
+  elif restart == 'Q':
+    time.sleep(1)
+    print("")
+    print("Goodbye!")
+    print("----------------------------------------")
+    stop()
+  else :
+    time.sleep(1)
+    print("I did not understand, restarting anyways...")
+    print("----------------------------------------")
+    print("")
+    game()
+
+# Game Code
+
+def game():
+  while True:
+    # Stop Counter
+    global counter
+    counter += 1
+    # First Portion
+    # Player A Enters a Word
+    user_A = input("Player A, type a word but keep a secret! ")
+    user_A = user_A.upper()
+    # Word is later made into a list
+    answer = list(user_A)
+    display = []
+    display.extend(answer)
+    # Displays the amount of letters are in the word
+    for i in range(len(display)):
+      display[i] = "_"
+    time.sleep(1)
+    print("----------------------------------------")
+    tries = 0
+    time.sleep(1)
+    # Second Portion
+    # Player B 
+    while tries < len(answer):
+      user_B = input ("Type a single letter to guess: ")
+      user_B = user_B.upper()
+      print("----------------------------------------")
+      for i in range(len(answer)):
+        # When Player B guesses it will appear
+        if answer[i] == user_B:
+          display[i] = user_B
+          tries = tries + 1
+          print("You guessed right, " + str(tries) + " time(s)!")
+          time.sleep(1)
+          print("----------------------------------------")
+      #Prints out the response
+      print(display)
+      print("----------------------------------------")
+    print("Congrats the word was *" + user_A + "*!")
+    time.sleep(1)
+    # Third Portion
+    restart()
+
+# Main Function
+
+main()
